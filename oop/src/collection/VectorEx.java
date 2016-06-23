@@ -2,9 +2,7 @@ package collection;
 
 import java.util.List;
 import java.util.Vector;
-
 import school2.Studente1Bean;
-
 /**
  * @date   :2016. 6. 23.
  * @author :ckan
