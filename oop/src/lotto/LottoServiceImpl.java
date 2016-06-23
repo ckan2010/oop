@@ -7,28 +7,30 @@ package lotto;
  * @story  :
  */
 public class LottoServiceImpl implements LottoService{
-	private int[][] Lottos;	
+	private int[][] lottos;
+	private int[] lotto;
 	private int count;
 	@Override
 	public void setLottos(LottoBean lot) {
 		count = this.getCount(lot);
-		Lottos = new int[count][6];
+		lottos = new int[count][6];
+		lotto = new int[6];
 		int num = 0;
 		int i = 0;
 		if (count <= 0) {
-			this.Lottos = null;
+			this.lottos = null;
 			return;
 		}
-		for (count = 0; count < Lottos.length; count++) {
+		for (count = 0; count < lottos.length; count++) {
 			while (true) {
 				lot.setNumber();
 				num = lot.getNumber();
 				if(isDuplication(count, num)){
 					continue;
 				}
-				Lottos[count][i] = num;
+				lottos[count][i] = num;
 				i++;
-				if (i>5) {
+				if (i==lotto.length) {
 					i = 0;
 					break;
 				}
@@ -38,13 +40,13 @@ public class LottoServiceImpl implements LottoService{
 	@Override
 	public int[][] getLottos() {
 		// 로또를 가져온다
-		return Lottos;
+		return lottos;
 	}
 	@Override
 	public boolean isDuplication(int arr, int num) {
 		// 중복방지
-		for (int i = 0; i < Lottos.length; i++) {
-			if (Lottos[arr][i] == num) {
+		for (int i = 0; i < lotto.length; i++) {
+			if (lottos[arr][i] == num) {
 				return true;
 			}
 		}
@@ -52,6 +54,7 @@ public class LottoServiceImpl implements LottoService{
 	}
 	@Override
 	public void sort(int[] arr) {
+		// 오름차순 정렬
 		int temp = 0;
 		for (int i = 0; i < arr.length - 1; i++) {
 			for (int j = 0; j < arr.length - i - 1; j++) {
