@@ -7,5 +7,9 @@ package lotto;
  * @story  :
  */
 public interface LottoService {
-	public abstract void Setshow();
+	public void setLottos(LottoBean lot);
+	public int[][] getLottos();
+	public boolean isDuplication(int arr,int num);
+	public void sort(int[] arr);
+	public int getCount(LottoBean lot);
 }

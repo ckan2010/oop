@@ -21,8 +21,8 @@ public class LottoBean {
 		return number;
 	}
 
-	public void setNumber(int number) {
-		this.number = number;
+	public void setNumber() {
+		this.number = (int)(Math.random()*45)+1;
 	}
 	
 }
