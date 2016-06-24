@@ -8,10 +8,33 @@ package lotto;
  */
 public class LottoBallServiceImpl implements LottoBallService{
 	private int[] lotto;
+	public LottoBallServiceImpl() {
+		lotto = new int[6];
+	}
 	@Override
 	public void setLottoBall(LottoBean lot) {
-		lotto = new int[6];
 		int num = 0;
+		for (int i = 0; i < lotto.length; i++) {
+			lotto[i] = 0;
+		}
+		for (int i = 0; i < lotto.length; i++) {
+			lot.setNumber();
+			num = lot.getNumber();
+			boolean exist = false;
+			for (int j = 0; j < lotto.length; j++) {
+				if (lotto[j] == num){
+					exist = true;
+					break;
+				}
+			}
+			if (exist) {
+				i--;
+				continue;
+			}else{
+				lotto[i] = num;
+			}
+		}
+		/*int num = 0;
 		boolean Duplication = false;
 		int i = 0;
 		while (true) {
@@ -31,7 +54,7 @@ public class LottoBallServiceImpl implements LottoBallService{
 				i = 0;
 				break;
 			}
-		}
+		}*/
 	}
 	@Override
 	public int[] getLottoBall() {
