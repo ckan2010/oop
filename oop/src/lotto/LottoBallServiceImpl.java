@@ -1,5 +1,7 @@
 package lotto;
 
+import java.util.Arrays;
+
 /**
  * @date   :2016. 6. 24.
  * @author :ckan
@@ -34,6 +36,7 @@ public class LottoBallServiceImpl implements LottoBallService{
 				lotto[i] = num;
 			}
 		}
+		Arrays.sort(lotto);
 		/*int num = 0;
 		boolean Duplication = false;
 		int i = 0;
