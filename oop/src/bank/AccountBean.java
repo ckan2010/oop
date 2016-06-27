@@ -22,7 +22,7 @@ public class AccountBean {
 		// 생성자 오버로딩 
 	}
 	public AccountBean(String name,String id,String pw) {// TODO Auto-generated constructor stub 할일 자동으로 만들었으니 개발자가 채워라
-		this.accountNo = (int) (Math.random() * 999999)+100000;
+		this.accountNo = (int) (Math.random() * 99999)+100000;
 		this.name = name;
 		this.id = id;
 		this.pw = pw;

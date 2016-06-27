@@ -23,11 +23,11 @@ public class BankServiceImpl implements BankService{
 		// return list.toString();
 		return list;
 	}
-	public AccountBean findByAccountNo(String AccountNo) {
+	public AccountBean findByAccountNo(String accountNo) {
 		AccountBean accout = new AccountBean();
 		int i = 0;
 		for (; i < list.size(); i++) {
-			if (String.valueOf(list.get(i).getAccountNo()).equals(AccountNo)) {
+			if (String.valueOf(list.get(i).getAccountNo()).equals(accountNo)) {
 				accout = list.get(i);
 				break;
 			}
@@ -57,8 +57,15 @@ public class BankServiceImpl implements BankService{
 		*/
 		return accout;
 	}
-	public List<AccountBean> findByName(String Name) {
-		return null;
+	public List<AccountBean> findByName(String name) {
+		List<AccountBean> tempList = new ArrayList<AccountBean>();
+		int i = 0;
+		for (; i < list.size(); i++) {
+			if (list.get(i).getName().equals(name)) {
+				tempList.add(list.get(i));
+			}
+		}
+		return tempList;
 	}
 	public String count() {
 		// 15계좌수
@@ -71,8 +78,19 @@ public class BankServiceImpl implements BankService{
 	}
 	public String deleteAccount(String accNo) {
 		// 17 삭제
-		AccountBean a = this.findByAccountNo(accNo);
-		return "";
+		AccountBean tempAcc = this.findByAccountNo(accNo);
+		String result = accNo+" 계좌가 없습니다.";
+		int i = 0;
+		if (!tempAcc.getId().equals("")) {
+			for (; i < list.size(); i++) {
+				if (String.valueOf(list.get(i).getAccountNo()).equals(accNo)) {
+					list.remove(i);
+					result = accNo+" 계좌가 해지되었습니다.";
+					break;
+				}
+			}
+		}
+		return result;
 	}
 
 }
