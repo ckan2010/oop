@@ -2,6 +2,7 @@ package bank;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 /**
  * @date   :2016. 6. 27.
@@ -10,10 +11,9 @@ import java.util.List;
  * @story  :
  */
 public class BankServiceImpl implements BankService{
-	// AccountBean[] arr = new AccountBean[15];
 	List<AccountBean> list;
 	public BankServiceImpl() {
-		list = new ArrayList<AccountBean>();
+		list = new Vector<AccountBean>();
 	}
 	public void openAccount(AccountBean account) {
 		// 11개설(은행창구개설)
@@ -32,29 +32,6 @@ public class BankServiceImpl implements BankService{
 				break;
 			}
 		}
-		/*
-		for (int i = 0; i < list.size(); i++) {
-			if (String.valueOf(list.get(i).getAccountNo()).equals(AccountNo)) {
-				accout = list.get(i);
-				break;
-			}
-		}
-		if (!AccountNo.equals(Integer.toString(accout.getAccountNo()))) {
-			return AccountNo+" 계좌는 없습니다.";
-		} else {
-			return accout.toString();
-		}
-		
-		String result = AccountNo+" 계좌는 없습니다.";
-		int i = 0;
-		for (; i < list.size(); i++) {
-			if (String.valueOf(list.get(i).getAccountNo()).equals(AccountNo)) {
-				result = list.get(i).toString();
-				break;
-			}
-		}
-		return result;
-		*/
 		return accout;
 	}
 	public List<AccountBean> findByName(String name) {
@@ -72,9 +49,18 @@ public class BankServiceImpl implements BankService{
 		return "전체통장 갯수 : "+list.size();
 		
 	}
-	public void updateAccount() {
-		// TODO Auto-generated method stub
-		
+	public String updateAccount(AccountBean acc) {
+		// 16 비번수정
+		String result = "";
+		AccountBean tempAcc = this.findByAccountNo(String.valueOf(acc.getAccountNo()));
+		int i = 0;
+		if (tempAcc.getId() == null) {
+			result = "계좌번호가 존재하지않습니다.";
+		} else {
+			tempAcc.setPw(acc.getPw());
+			result = "비밀번호 변경되었습니다.";
+		}
+		return result;
 	}
 	public String deleteAccount(String accNo) {
 		// 17 삭제
@@ -82,13 +68,7 @@ public class BankServiceImpl implements BankService{
 		String result = accNo+" 계좌가 없습니다.";
 		int i = 0;
 		if (!tempAcc.getId().equals("")) {
-			for (; i < list.size(); i++) {
-				if (String.valueOf(list.get(i).getAccountNo()).equals(accNo)) {
-					list.remove(i);
-					result = accNo+" 계좌가 해지되었습니다.";
-					break;
-				}
-			}
+			list.remove(tempAcc);
 		}
 		return result;
 	}

@@ -1,11 +1,3 @@
-/bank/
-/collection/
-/controller/
-/gameRps/
-/global/
-/grade/
-/images/
-/kaup/
 /lotto/
 /matrix/
 /phone/
@@ -19,3 +11,6 @@
 /simpleRPS5/
 /simpleRps1/
 /something/
+/bank/
+/map/
+/collection/

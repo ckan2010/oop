@@ -23,7 +23,6 @@ public class BankController {
 		AccountService service = new AccountServiceImpl();
 		BankService serv = new BankServiceImpl();
 		AccountBean tempAcc = new AccountBean();
-		List<AccountBean> tempList = new ArrayList<AccountBean>();
 		String spec = "";
 		String[] accou = new String[3];
 		int ok = 0;
@@ -32,7 +31,7 @@ public class BankController {
 					+ "================개인인터넷뱅킹=================\n"
 					+ "1개설 2입금 3조회 4출금 5통장내역 6해지\n"
 					+ "================은행창구=======================\n"
-					+ "11통장개설 12조회(전체) 13계좌번호조회 14이름조회 15전체통장수  16수정 17해지 0종료\n")) {
+					+ "11통장개설 12조회(전체) 13계좌번호조회 14이름조회 15전체통장수 16수정(비번) 17해지 0종료\n")) {
 			case "1":
 				spec = JOptionPane.showInputDialog("이름,ID,PW");
 				accou = spec.split(",");
@@ -76,11 +75,18 @@ public class BankController {
 				break;
 			case "14":
 				String serchName = JOptionPane.showInputDialog("검색하려는 이름");
-				tempList = serv.findByName(serchName);
-				JOptionPane.showMessageDialog(null, (tempList.size() != 0?tempList.toString():serchName+" 이름이 없습니다."));
+				List<AccountBean> tempList = serv.findByName(serchName);
+				JOptionPane.showMessageDialog(null, (tempList.isEmpty()?serchName+" 이름이 없습니다.":tempList.toString()));
 				break;
 			case "15":
 				JOptionPane.showMessageDialog(null,serv.count() );
+				break;
+			case "16":
+				String pwUpdate = JOptionPane.showInputDialog("수정하려는 계좌번호,비밀번호");
+				String changeArr[] = pwUpdate.split(",");
+				tempAcc.setAcountNo(Integer.parseInt(changeArr[0]));
+				tempAcc.setPw(changeArr[1]);
+				JOptionPane.showMessageDialog(null, serv.updateAccount(tempAcc));
 				break;
 			case "17":
 				JOptionPane.showMessageDialog(null, serv.deleteAccount(JOptionPane.showInputDialog("해지계좌 번호 ")));

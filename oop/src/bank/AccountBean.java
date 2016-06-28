@@ -50,11 +50,14 @@ public class AccountBean {
 	}
 	public String toString() {// 메소드 오버라이딩
 		return global.MyConstants.BANK_NAME+" [계좌번호= " + accountNo + ", 이름= " + name + 
-				  ", 잔액 = " + money + ", 아이디= " + id +", 비번= ****"
+				  ", 잔액 = " + money + ", 아이디= " + id +", 비번=****"
 				+ "]";
 	}
 	public void setAccountNo() {
 		this.accountNo = (int) (Math.random() * 999999)+100000;
+	}
+	public void setAcountNo(int accNo){
+		this.accountNo = accNo;
 	}
 	public void setName(String name) {
 		this.name = name;

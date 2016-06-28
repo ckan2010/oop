@@ -20,7 +20,7 @@ public interface BankService {
 	// READ : 15조회(전체통장수)
 	public String count();
 	// UPDATE : 16 수정.. 사용자의 요청에 의해 비번만 전환가능
-	public void updateAccount();// AccountNo,PW
+	public String updateAccount(AccountBean acc);// AccountNo,PW
 	// DELETE : 17삭제
 	public String deleteAccount(String accNo);// AccountNo
 }
