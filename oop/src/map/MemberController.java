@@ -11,9 +11,7 @@ import javax.swing.JOptionPane;
 public class MemberController {
 	public static void main(String[] args) {
 		MemeberService service = new MemberServiceImpl();
-		MemberBean tempBean = new MemberBean();
 		String memberInfo = "";
-		String temp = "";
 		while (true) {
 			switch (JOptionPane.showInputDialog(""
 					+ "---- 회원이 보는 화면 ---\n"
@@ -31,22 +29,25 @@ public class MemberController {
 				JOptionPane.showMessageDialog(null, service.join(member));
 				break;
 			case "2":
-				memberInfo = JOptionPane.showInputDialog("아이디,비번 입력");
-				String[] arrMember1  = memberInfo.split(",");
-				MemberBean member1 = new MemberBean();
-				member1.setId(arrMember1[0]);
-				member1.setPw(arrMember1[1]);
-				System.out.println("setId = "+arrMember1[0]);
-				System.out.println("setPw = "+arrMember1[1]);
-				JOptionPane.showMessageDialog(null, service.login(member1));
+				memberInfo = JOptionPane.showInputDialog("id,pw");
+				String[] arr2 = memberInfo.split(",");
+				MemberBean member2 = new MemberBean();
+				member2.setId(arr2[0]);
+				member2.setPw(arr2[1]);
+				JOptionPane.showMessageDialog(null, service.login(member2));
 				break;
 			case "3":
-				member = service.detail();
-				member.toString();
+				MemberBean member4 = new MemberBean();
+				member4 = service.detail();
+				if (member4.getId() == null) {
+					JOptionPane.showMessageDialog(null, "2로그인 먼저해주세요.");
+				} else {
+					JOptionPane.showMessageDialog(null, member4.toString());
+				}
 				break;
 			case "4":
-				MemberBean member2 = new MemberBean();
-				service.updatePW(member2);
+				MemberBean member3 = new MemberBean();
+				service.updatePW(member3);
 				break;
 			case "5":
 				service.delete();
@@ -56,14 +57,15 @@ public class MemberController {
 				break;
 			case "12":
 				String serchId = JOptionPane.showInputDialog("검색 ID");
+				MemberBean tempBean = new MemberBean();
 				tempBean = service.findById(serchId);
 				JOptionPane.showMessageDialog(null, (tempBean.getId()==null)?serchId+" ID 가 존재하지 않습니다.":tempBean.toString());
 				break;
 			case "13":
-				service.findByName(temp);
+				service.findByName(memberInfo);
 				break;
 			case "14":
-				service.findByGender(temp);
+				service.findByGender(memberInfo);
 				break;
 			case "15":
 				service.count();

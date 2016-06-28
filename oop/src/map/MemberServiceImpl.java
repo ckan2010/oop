@@ -25,17 +25,13 @@ public class MemberServiceImpl implements MemeberService{
 	}
 	@Override
 	public String login(MemberBean member) {
-		System.out.println("map pw : "+map.get(member.getId()).getPw());
-		System.out.println("member pw : "+member.getPw());
-		String result = "";
+		String result = "ID가 존재하지 않습니다.";
 		if (map.containsKey(member.getId())) {
 			if (findById(member.getId()).getPw().equals(member.getPw())) {
-				result = member.getName()+" 님 안녕하세요.";
+				result = map.get(member.getId()).getName()+" 님 안녕하세요.";
 				session = findById(member.getId());
 			} 
-		} else {
-			result = "ID가 존재하지 않습니다.";
-		}
+		} 
 		return result;
 	}
 	@Override
