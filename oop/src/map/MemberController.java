@@ -1,5 +1,8 @@
 package map;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JOptionPane;
 
 /**
@@ -29,7 +32,7 @@ public class MemberController {
 				JOptionPane.showMessageDialog(null, service.join(member));
 				break;
 			case "2":
-				memberInfo = JOptionPane.showInputDialog("id,pw");
+				memberInfo = JOptionPane.showInputDialog("아이디,비번 입력");
 				String[] arr2 = memberInfo.split(",");
 				MemberBean member2 = new MemberBean();
 				member2.setId(arr2[0]);
@@ -37,23 +40,18 @@ public class MemberController {
 				JOptionPane.showMessageDialog(null, service.login(member2));
 				break;
 			case "3":
-				MemberBean member4 = new MemberBean();
-				member4 = service.detail();
-				if (member4.getId() == null) {
-					JOptionPane.showMessageDialog(null, "2로그인 먼저해주세요.");
-				} else {
-					JOptionPane.showMessageDialog(null, member4.toString());
-				}
+				JOptionPane.showMessageDialog(null, service.detail());
 				break;
 			case "4":
 				MemberBean member3 = new MemberBean();
-				service.updatePW(member3);
+				member3.setPw(JOptionPane.showInputDialog("변경비번 입력"));
+				JOptionPane.showMessageDialog(null, service.updatePW(member3));
 				break;
 			case "5":
-				service.delete();
+				JOptionPane.showMessageDialog(null, service.delete());
 				break;
 			case "11":
-				service.list();
+				JOptionPane.showMessageDialog(null,service.list());
 				break;
 			case "12":
 				String serchId = JOptionPane.showInputDialog("검색 ID");
@@ -62,10 +60,11 @@ public class MemberController {
 				JOptionPane.showMessageDialog(null, (tempBean.getId()==null)?serchId+" ID 가 존재하지 않습니다.":tempBean.toString());
 				break;
 			case "13":
-				service.findByName(memberInfo);
+				JOptionPane.showMessageDialog(null, service.findByName(JOptionPane.showInputDialog("검색 이름")));
 				break;
 			case "14":
-				service.findByGender(memberInfo);
+				String tempGender = JOptionPane.showInputDialog("남/여 몇명 인지 조회");
+				JOptionPane.showMessageDialog(null, tempGender+" 은 "+service.countByGender(tempGender)+" 명 입니다.");
 				break;
 			case "15":
 				service.count();
