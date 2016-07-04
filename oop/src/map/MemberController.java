@@ -67,7 +67,7 @@ public class MemberController {
 				JOptionPane.showMessageDialog(null, tempGender+" 은 "+service.countByGender(tempGender)+" 명 입니다.");
 				break;
 			case "15":
-				service.count();
+				JOptionPane.showMessageDialog(null, service.count()+" 명");
 				break;
 			case "0":
 				return;
